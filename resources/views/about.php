@@ -10,13 +10,7 @@
 
 <body>
 	<header>
-		<nav>
-			<ul>
-				<li><a href="/">Главная</a></li>
-				<li><a href="/about">О нас</a></li>
-				<li><a href="/contacts">Контакты</a></li>
-			</ul>
-		</nav>
+		<?php include 'menu.php'; ?>
 	</header>
 	<main>
 		<h1>О нас</h1>

@@ -10,11 +10,13 @@
 
 <body>
 	<header>
-		<nav>
-			<?php include 'menu.php'; ?>
+		<?php include 'menu.php'; ?>
 	</header>
 	<main>
-		<h1>Наши контакты</h1>
+		<h1><?= $news['title'] ?></h1>
+		<p>
+			<?= $news['text'] ?>
+		</p>
 	</main>
 </body>
 

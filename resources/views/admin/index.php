@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -9,13 +9,8 @@
 </head>
 
 <body>
-	<header>
-		<nav>
-			<?php include 'menu.php'; ?>
-	</header>
-	<main>
-		<h1>Наши контакты</h1>
-	</main>
+	<?php include 'menu.php'; ?>
+	<h2>Админка Главная</h2>
 </body>
 
 </html>

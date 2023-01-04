@@ -10,11 +10,16 @@
 
 <body>
 	<header>
-		<nav>
-			<?php include 'menu.php'; ?>
+		<?php include 'menu.php'; ?>
 	</header>
 	<main>
-		<h1>Наши контакты</h1>
+		<h1>Новости</h1>
+		<?php foreach ($news as $item): ?>
+			<a href="<?= route('news.one', $item['id']) ?>">
+				<?= $item['title'] ?>
+			</a>
+			<br>
+		<?php endforeach ?>
 	</main>
 </body>
 

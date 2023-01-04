@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +20,22 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::view('/', 'index');
-Route::view('/about', 'about');
-Route::view('/contacts', 'contacts');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::group([
+	'prefix' => 'admin',
+	'as' => 'admin.'
+], function () {
+	Route::get('/', [IndexController::class, 'index'])->name('index');
+	Route::get('/test1', [IndexController::class, 'test1'])->name('test1');
+	Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
+});
+
+
+Route::group([
+	'prefix' => 'news',
+	'as' => 'news.'
+], function () {
+	Route::get('/', [NewsController::class, 'index'])->name('list');
+	Route::get('/{id}', [NewsController::class, 'show'])->name('one');
+});
