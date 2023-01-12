@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', function(){
     return view('about');
@@ -29,23 +24,39 @@ Route::get('/about', function(){
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::group([
-	'prefix' => 'admin',
-	'as' => 'admin.'
+    'prefix' => 'admin',
+    'as' => 'admin.'
 ], function () {
-	Route::get('/', [IndexController::class, 'index'])->name('index');
-	Route::get('/test1', [IndexController::class, 'test1'])->name('test1');
-	Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
-});
+    Route::get('/', [IndexController::class, 'index'])->name('index');
+    Route::get('/addNews', [IndexController::class, 'addNews'])->name('addNews');
+    Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
+})->middleware(['auth', 'verified']);
 
 
 Route::group([
-	'prefix' => 'news',
-	'as' => 'news.'
+    'prefix' => 'news',
+    'as' => 'news.'
 ], function () {
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
     Route::get('/categories/{slug}', [CategoriesController::class, 'show'])->name('categories.show');
-	Route::get('/', [NewsController::class, 'index'])->name('index');
-	Route::get('/{id}', [NewsController::class, 'show'])->name('show');
+    Route::get('/', [NewsController::class, 'index'])->name('index');
+    Route::get('/{id}', [NewsController::class, 'show'])->name('show');
 
 });
 
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+    <div class="mt-6 bg-gray-100 shadow-sm rounded-lg divide-y">
     <h1>Новости</h1>
     @forelse ($news as $item)
         <h2>{{$item['title']}}</h2>
@@ -19,4 +20,5 @@
     @empty
         <p>Нет новостей</p>
         @endforelse
+    </div>
 @endsection
